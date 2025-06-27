@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쩝쩝 박사 - 카테고리</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 3rem 0;
+        }
+
+        .page-header {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 3rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .category-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-header .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .category-content {
+            padding: 2rem;
+        }
+
+        .category-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .category-link {
+            display: block;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .alphabet-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .alphabet-section h2 {
+            color: #ff6b6b;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .alphabet-link {
+            display: block;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .korean-alphabet {
+            font-size: 2rem;
+        }
+
+        .quick-access {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            padding: 3rem;
+        }
+
+        .quick-access h2 {
+            color: #ff6b6b;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .quick-link .icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .quick-link .text {
+            flex: 1;
+        }
+
+        .quick-link .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .quick-link .desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-links {
+                grid-template-columns: 1fr;
+            }
+
+            .alphabet-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="insikwemain.html" class="logo">쩝쩝 박사</a>
+                <nav>
+                    <ul>
+                        <li><a href="insikwemain.html">메인</a></li>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="mypage.html">마이페이지</a></li>
+                        <li><a href="kfood.html">레시피</a></li>
+                        <li><a href="master.html">커뮤니티</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>🍳 레시피 카테고리</h1>
+                <p>원하는 카테고리를 선택하여 맛있는 레시피를 찾아보세요</p>
+            </div>
+
+            <div class="category-grid">
+                <div class="category-section">
+                    <div class="category-header">
+                        <span class="icon">🍚</span>
+                        <h2>요리 종류별</h2>
+                        <p>다양한 국가의 요리를 만나보세요</p>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-links">
+                            <a href="kfood.html" class="category-link">한식 🥢</a>
+                            <a href="wfood.html" class="category-link">양식 🍝</a>
+                            <a href="cfood.html" class="category-link">중식 🥟</a>
+                            <a href="jfood.html" class="category-link">일식 🍣</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <div class="category-header">
+                        <span class="icon">📚</span>
+                        <h2>인기 콘텐츠</h2>
+                        <p>다양한 매체의 인기 레시피들</p>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-links">
+                            <a href="yotube.html" class="category-link">유튜브 📹</a>
+                            <a href="blog.html" class="category-link">블로그 📝</a>
+                            <a href="post.html" class="category-link">칼럼 📰</a>
+                            <a href="today.html" class="category-link">오늘의 레시피 ⭐</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <div class="category-header">
+                        <span class="icon">🌟</span>
+                        <h2>특별 카테고리</h2>
+                        <p>시즌별 특별한 레시피들</p>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-links">
+                            <a href="season.html" class="category-link">제철 레시피 🍂</a>
+                            <a href="search.html" class="category-link">레시피 검색 🔍</a>
+                            <a href="master.html" class="category-link">고수의 팁 💡</a>
+                            <a href="question.html" class="category-link">요린이 질문 ❓</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alphabet-section">
+                <h2>🔤 알파벳별 레시피 찾기</h2>
+                <div class="alphabet-grid">
+                    <a href="a.html" class="alphabet-link">A</a>
+                    <a href="b.html" class="alphabet-link">B</a>
+                    <a href="c.html" class="alphabet-link">C</a>
+                </div>
+                
+                <h2 style="margin-top: 3rem;">🇰🇷 한글 자음별 레시피 찾기</h2>
+                <div class="alphabet-grid">
+                    <a href="giuck.html" class="alphabet-link korean-alphabet">ㄱ</a>
+                    <a href="nieun.html" class="alphabet-link korean-alphabet">ㄴ</a>
+                    <a href="digeck.html" class="alphabet-link korean-alphabet">ㄷ</a>
+                    <a href="rieul.html" class="alphabet-link korean-alphabet">ㄹ</a>
+                </div>
+            </div>
+
+            <div class="quick-access">
+                <h2>🚀 빠른 접근</h2>
+                <div class="quick-links">
+                    <a href="today.html" class="quick-link">
+                        <span class="icon">⭐</span>
+                        <div class="text">
+                            <div class="title">오늘의 레시피</div>
+                            <div class="desc">매일 업데이트되는 추천 레시피</div>
+                        </div>
+                    </a>
+                    <a href="season.html" class="quick-link">
+                        <span class="icon">🍂</span>
+                        <div class="text">
+                            <div class="title">제철 레시피</div>
+                            <div class="desc">계절에 맞는 신선한 재료 요리</div>
+                        </div>
+                    </a>
+                    <a href="youtube.html" class="quick-link">
+                        <span class="icon">📹</span>
+                        <div class="text">
+                            <div class="title">유튜브 인기</div>
+                            <div class="desc">영상으로 보는 인기 레시피</div>
+                        </div>
+                    </a>
+                    <a href="search.html" class="quick-link">
+                        <span class="icon">🔍</span>
+                        <div class="text">
+                            <div class="title">레시피 검색</div>
+                            <div class="desc">원하는 레시피를 쉽게 찾기</div>
+                        </div>
+                    </a>
+                    <a href="free.html" class="quick-link">
+                        <span class="icon">💬</span>
+                        <div class="text">
+                            <div class="title">자유 게시판</div>
+                            <div class="desc">요리 경험과 팁 공유</div>
+                        </div>
+                    </a>
+                    <a href="master.html" class="quick-link">
+                        <span class="icon">👨‍🍳</span>
+                        <div class="text">
+                            <div class="title">고수의 팁</div>
+                            <div class="desc">전문가들의 요리 비법</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 정인식</p>
+        </div>
+    </footer>
+</body>
+</html>

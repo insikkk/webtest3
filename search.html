@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쩝쩝 박사 - 레시피 검색</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .search-header {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .search-header h2 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .search-form {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+
+        .search-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .keyword-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .keyword-nav a {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            color: #ff6b6b;
+            text-decoration: none;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .search-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .category-card h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .popular-searches {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .popular-searches h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .popular-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .popular-item {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .popular-item:hover {
+            background: #ff5252;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .search-input-group {
+                flex-direction: column;
+            }
+
+            .keyword-nav {
+                justify-content: center;
+            }
+
+            .search-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="insikwemain.html" class="logo">쩝쩝 박사</a>
+                <nav>
+                    <ul>
+                        <li><a href="insikwemain.html">메인</a></li>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="mypage.html">마이페이지</a></li>
+                        <li><a href="category.html">카테고리</a></li>
+                        <li><a href="kfood.html">레시피</a></li>
+                        <li><a href="master.html">커뮤니티</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="search-header">
+                <h2>레시피 검색</h2>
+                <p>원하는 요리 레시피를 쉽게 찾아보세요</p>
+                
+                <form class="search-form">
+                    <div class="search-input-group">
+                        <input type="text" class="search-input" placeholder="요리명, 재료명, 조리법을 입력해주세요">
+                        <button type="submit" class="search-btn">검색</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="keyword-nav">
+                <a href="giuck.html">ㄱ</a>
+                <a href="nieun.html">ㄴ</a>
+                <a href="digeck.html">ㄷ</a>
+                <a href="rieul.html">ㄹ</a>
+                <a href="a.html">A</a>
+                <a href="b.html">B</a>
+                <a href="c.html">C</a>
+            </div>
+
+            <div class="search-categories">
+                <div class="category-card">
+                    <h3>요리 종류별 검색</h3>
+                    <div class="category-tags">
+                        <a href="#" class="tag">한식</a>
+                        <a href="#" class="tag">양식</a>
+                        <a href="#" class="tag">중식</a>
+                        <a href="#" class="tag">일식</a>
+                        <a href="#" class="tag">디저트</a>
+                        <a href="#" class="tag">음료</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <h3>조리 방법별 검색</h3>
+                    <div class="category-tags">
+                        <a href="#" class="tag">볶음</a>
+                        <a href="#" class="tag">찜</a>
+                        <a href="#" class="tag">구이</a>
+                        <a href="#" class="tag">튀김</a>
+                        <a href="#" class="tag">찌개</a>
+                        <a href="#" class="tag">탕</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <h3>재료별 검색</h3>
+                    <div class="category-tags">
+                        <a href="#" class="tag">닭고기</a>
+                        <a href="#" class="tag">돼지고기</a>
+                        <a href="#" class="tag">소고기</a>
+                        <a href="#" class="tag">해산물</a>
+                        <a href="#" class="tag">채소</a>
+                        <a href="#" class="tag">면류</a>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <h3>난이도별 검색</h3>
+                    <div class="category-tags">
+                        <a href="#" class="tag">초급</a>
+                        <a href="#" class="tag">중급</a>
+                        <a href="#" class="tag">고급</a>
+                        <a href="#" class="tag">15분 요리</a>
+                        <a href="#" class="tag">30분 요리</a>
+                        <a href="#" class="tag">간단 요리</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popular-searches">
+                <h3>인기 검색어</h3>
+                <div class="popular-list">
+                    <a href="#" class="popular-item">김치찌개</a>
+                    <a href="#" class="popular-item">카르보나라</a>
+                    <a href="#" class="popular-item">제육볶음</a>
+                    <a href="#" class="popular-item">된장찌개</a>
+                    <a href="#" class="popular-item">불고기</a>
+                    <a href="#" class="popular-item">마파두부</a>
+                    <a href="#" class="popular-item">치킨</a>
+                    <a href="#" class="popular-item">피자</a>
+                    <a href="#" class="popular-item">스테이크</a>
+                    <a href="#" class="popular-item">라면</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 정인식</p>
+        </div>
+    </footer>
+</body>
+</html>

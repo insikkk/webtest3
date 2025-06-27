@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쩝쩝 박사 - 고수의 팁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .community-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .community-nav a {
+            padding: 0.8rem 2rem;
+            background: white;
+            color: #ff6b6b;
+            text-decoration: none;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .community-nav a.active {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .post-list {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .post-item {
+            padding: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .post-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .post-content {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .tag.expert {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .write-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #ff6b6b;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+            transition: all 0.3s;
+        }
+
+        .write-button:hover {
+            background: #ff5252;
+            transform: scale(1.1);
+        }
+
+        .featured-tips {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .featured-tips h3 {
+            color: #ff6b6b;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-content {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .community-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .write-button {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="insikwemain.html" class="logo">쩝쩝 박사</a>
+                <nav>
+                    <ul>
+                        <li><a href="insikwemain.html">메인</a></li>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="mypage.html">마이페이지</a></li>
+                        <li><a href="category.html">카테고리</a></li>
+                        <li><a href="kfood.html">레시피</a></li>
+                        <li><a href="master.html">커뮤니티</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>고수의 팁</h2>
+                <p>요리 전문가들이 공유하는 특별한 노하우</p>
+            </div>
+
+            <div class="community-nav">
+                <a href="master.html" class="active">고수의 팁</a>
+                <a href="question.html">요린이의 질문</a>
+                <a href="free.html">자유 게시판</a>
+            </div>
+
+            <div class="featured-tips">
+                <h3>🔥 이번 주 인기 팁</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-title">완벽한 계란 프라이 만들기</div>
+                        <div class="tip-content">팬을 충분히 달군 후 기름을 두르고 계란을 넣으세요. 소금을 살짝 뿌리면 더 맛있어집니다.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">양파 썰 때 눈물 안 나는 법</div>
+                        <div class="tip-content">양파를 냉장고에 30분 정도 넣어두거나, 칼을 물에 적시면서 써는 방법이 효과적입니다.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">고기 부드럽게 만드는 비법</div>
+                        <div class="tip-content">요리 전 30분 정도 우유나 요구르트에 재우면 고기가 훨씬 부드러워집니다.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-list">
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">파스타 면발을 탱탱하게 만드는 시크릿</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">셰</div>
+                                    <span>이탈리아 셰프</span>
+                                </div>
+                                <span>2024.06.25</span>
+                                <span>조회 2,341</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        많은 분들이 파스타를 끓일 때 면이 눅눅해진다고 하시는데, 가장 중요한 포인트는 물의 양과 소금입니다. 
+                        면 100g당 최소 1L의 물을 사용하고, 물이 팔팔 끓을 때 소금을 넣어주세요. 
+                        그리고 면을 넣고 젓가락으로 살살 저어주면 완벽한 알덴테를 만들 수 있습니다.
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag expert">전문가</span>
+                        <span class="tag">파스타</span>
+                        <span class="tag">이탈리아요리</span>
+                        <span class="tag">면요리</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 156</div>
+                        <div class="stat-item">💬 23</div>
+                        <div class="stat-item">🔖 89</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">김치찌개 깊은 맛 내는 비법</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">한</div>
+                                    <span>한식요리연구가</span>
+                                </div>
+                                <span>2024.06.24</span>
+                                <span>조회 1,892</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        김치찌개의 깊은 맛은 김치에서 나옵니다. 신 김치를 사용하는 것이 좋고, 
+                        김치를 먼저 기름에 볶아 김치의 깊은 맛을 우려낸 후 물을 부어주세요. 
+                        여기에 다시마 우린 물을 사용하면 더욱 깊은 감칠맛을 낼 수 있습니다.
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag expert">전문가</span>
+                        <span class="tag">김치찌개</span>
+                        <span class="tag">한식</span>
+                        <span class="tag">국물요리</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 203</div>
+                        <div class="stat-item">💬 45</div>
+                        <div class="stat-item">🔖 127</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">스테이크 완벽하게 굽는 법</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">스</div>
+                                    <span>스테이크 마스터</span>
+                                </div>
+                                <span>2024.06.23</span>
+                                <span>조회 3,456</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        스테이크의 핵심은 온도 관리입니다. 고기를 실온에 30분 정도 두어 온도를 맞춘 후, 
+                        뜨겁게 달군 팬에 올려주세요. 미디움 레어를 원한다면 한 면당 2-3분씩 구워주시면 됩니다. 
+                        구운 후에는 반드시 5분간 휴지시켜 육즙이 고기 전체에 퍼지도록 해주세요.
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag expert">전문가</span>
+                        <span class="tag">스테이크</span>
+                        <span class="tag">양식</span>
+                        <span class="tag">고기요리</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 298</div>
+                        <div class="stat-item">💬 67</div>
+                        <div class="stat-item">🔖 184</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">중화팬 길들이기와 관리법</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">중</div>
+                                    <span>중식 전문셰프</span>
+                                </div>
+                                <span>2024.06.22</span>
+                                <span>조회 1,234</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        새 중화팬을 처음 사용할 때는 반드시 시즈닝 과정을 거쳐야 합니다. 
+                        팬을 깨끗이 씻은 후 강불에서 달군 다음, 기름을 두르고 파나 양파를 볶아내면 됩니다. 
+                        이 과정을 2-3번 반복하면 팬이 길들여져서 음식이 눌어붙지 않습니다.
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag expert">전문가</span>
+                        <span class="tag">중화팬</span>
+                        <span class="tag">도구관리</span>
+                        <span class="tag">팁</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 87</div>
+                        <div class="stat-item">💬 19</div>
+                        <div class="stat-item">🔖 56</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">베이킹 시 오븐 온도 관리의 중요성</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">베</div>
+                                    <span>파티시에</span>
+                                </div>
+                                <span>2024.06.21</span>
+                                <span>조회 1,789</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        베이킹에서 가장 중요한 것 중 하나가 오븐 온도입니다. 
+                        오븐마다 실제 온도가 다를 수 있으니 오븐 온도계를 사용해서 정확한 온도를 확인하세요. 
+                        그리고 베이킹 중에는 절대 오븐 문을 열지 마세요. 온도가 급격히 떨어져 실패할 수 있습니다.
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag expert">전문가</span>
+                        <span class="tag">베이킹</span>
+                        <span class="tag">오븐</span>
+                        <span class="tag">디저트</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 145</div>
+                        <div class="stat-item">💬 28</div>
+                        <div class="stat-item">🔖 92</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="write-button">✏️</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 정인식</p>
+        </div>
+    </footer>
+</body>
+</html>

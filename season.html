@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쩝쩝 박사 - 제철 레시피</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .season-info {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .season-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .season-nav a {
+            padding: 1rem 2rem;
+            background: white;
+            color: #ff6b6b;
+            text-decoration: none;
+            border-radius: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .season-nav a:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .season-nav a.active {
+            background: #28a745;
+            color: white;
+        }
+
+        .ingredients-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .ingredients-section h3 {
+            color: #28a745;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ingredient-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .ingredient-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .ingredient-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .ingredient-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-season {
+            color: #28a745;
+            font-size: 0.9rem;
+        }
+
+        .recipe-section h3 {
+            color: #ff6b6b;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .recipe-image {
+            height: 200px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .season-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.9);
+            color: #28a745;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .recipe-content {
+            padding: 1.5rem;
+        }
+
+        .recipe-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .recipe-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .recipe-ingredients {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .ingredients-title {
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .ingredients-list {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .recipe-difficulty {
+            background: #28a745;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .season-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .ingredients-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="insikwemain.html" class="logo">쩝쩝 박사</a>
+                <nav>
+                    <ul>
+                        <li><a href="insikwemain.html">메인</a></li>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="mypage.html">마이페이지</a></li>
+                        <li><a href="category.html">카테고리</a></li>
+                        <li><a href="kfood.html">레시피</a></li>
+                        <li><a href="master.html">커뮤니티</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <div class="season-info">🌱 여름철 (6-8월)</div>
+                <h2>제철 레시피</h2>
+                <p>계절에 맞는 신선한 재료로 만드는 특별한 요리</p>
+            </div>
+
+            <div class="season-nav">
+                <a href="#">🌸 봄</a>
+                <a href="#" class="active">🌱 여름</a>
+                <a href="#">🍂 가을</a>
+                <a href="#">❄️ 겨울</a>
+            </div>
+
+            <div class="ingredients-section">
+                <h3>여름철 제철 재료</h3>
+                <div class="ingredients-grid">
+                    <div class="ingredient-card">
+                        <div class="ingredient-icon">🍅</div>
+                        <div class="ingredient-name">토마토</div>
+                        <div class="ingredient-season">6-9월</div>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-icon">🥒</div>
+                        <div class="ingredient-name">오이</div>
+                        <div class="ingredient-season">6-8월</div>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-icon">🌽</div>
+                        <div class="ingredient-name">옥수수</div>
+                        <div class="ingredient-season">7-9월</div>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-icon">🥬</div>
+                        <div class="ingredient-name">상추</div>
+                        <div class="ingredient-season">5-8월</div>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-icon">🍑</div>
+                        <div class="ingredient-name">복숭아</div>
+                        <div class="ingredient-season">7-9월</div>
+                    </div>
+                    <div class="ingredient-card">
+                        <div class="ingredient-icon">🍉</div>
+                        <div class="ingredient-name">수박</div>
+                        <div class="ingredient-season">6-8월</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recipe-section">
+                <h3>여름철 추천 레시피</h3>
+                <div class="recipe-grid">
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            🍅
+                            <div class="season-badge">여름</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-title">오이 냉국</div>
+                            <div class="recipe-description">시원하고 오이로 만든 여름철 별미 냉국</div>
+                            <div class="recipe-ingredients">
+                                <div class="ingredients-title">주요 재료</div>
+                                <div class="ingredients-list"> 오이, 양파, 다시마육수</div>
+                            </div>
+                            <div class="recipe-meta">
+                                <span class="recipe-difficulty">쉬움</span>
+                                <span>20분</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            🥒
+                            <div class="season-badge">여름</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-title">수박 화채</div>
+                            <div class="recipe-description">수박을 썰은 후 우유와 사이다와 함께 섞어 먹는 요리</div>
+                            <div class="recipe-ingredients">
+                                <div class="ingredients-title">주요 재료</div>
+                                <div class="ingredients-list">수박, 우유, 사이다, 설탕</div>
+                            </div>
+                            <div class="recipe-meta">
+                                <span class="recipe-difficulty">쉬움</span>
+                                <span>15분</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            🌽
+                            <div class="season-badge">여름</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-title">옥수수 스프</div>
+                            <div class="recipe-description">옥수수를 찐 후 알맹이와 우유, 버터를 한 팬에 넣고 약불에 끓이는 요리</div>
+                            <div class="recipe-ingredients">
+                                <div class="ingredients-title">주요 재료</div>
+                                <div class="ingredients-list">옥수수, 우유, 양파, 버터</div>
+                            </div>
+                            <div class="recipe-meta">
+                                <span class="recipe-difficulty">보통</span>
+                                <span>30분</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            🥗
+                            <div class="season-badge">여름</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-title">토마토 샐러드</div>
+                            <div class="recipe-description">신선한 토마토와 바질을 올리브 오일에 무치는 요리</div>
+                            <div class="recipe-ingredients">
+                                <div class="ingredients-title">주요 재료</div>
+                                <div class="ingredients-list">토마토, 모짜렐라, 바질, 올리브오일</div>
+                            </div>
+                            <div class="recipe-meta">
+                                <span class="recipe-difficulty">쉬움</span>
+                                <span>10분</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            🍜
+                            <div class="season-badge">여름</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-title">콩국수</div>
+                            <div class="recipe-description">삶은 콩을 믹서기에 갈아 넣은 후 삶은 소면을 기호에 맞게 설탕, 소금을 골라 넣어 먹는 요리</div>
+                            <div class="recipe-ingredients">
+                                <div class="ingredients-title">주요 재료</div>
+                                <div class="ingredients-list">콩, 소면, 오이</div>
+                            </div>
+                            <div class="recipe-meta">
+                                <span class="recipe-difficulty">보통</span>
+                                <span>40분</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recipe-card">
+                        <div class="recipe-image">
+                            🍉
+                            <div class="season-badge">여름</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-title">수박 주스</div>
+                            <div class="recipe-description">달콤하고 시원한 수박으로 만든 천연 주스</div>
+                            <div class="recipe-ingredients">
+                                <div class="ingredients-title">주요 재료</div>
+                                <div class="ingredients-list">수박, 민트, 라임, 얼음</div>
+                            </div>
+                            <div class="recipe-meta">
+                                <span class="recipe-difficulty">쉬움</span>
+                                <span>5분</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 정인식</p>
+        </div>
+    </footer>
+</body>
+</html>

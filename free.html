@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쩝쩝 박사 - 자유 게시판</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .community-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .community-nav a {
+            padding: 0.8rem 2rem;
+            background: white;
+            color: #ff6b6b;
+            text-decoration: none;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .community-nav a:hover {
+            background: #ff6b6b;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .community-nav a.active {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .post-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-tab {
+            padding: 0.5rem 1.5rem;
+            background: white;
+            color: #666;
+            text-decoration: none;
+            border-radius: 20px;
+            border: 2px solid #eee;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .category-tab:hover, .category-tab.active {
+            background: #6c757d;
+            color: white;
+            border-color: #6c757d;
+        }
+
+        .post-list {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .post-item {
+            padding: 2rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .post-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .post-content {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .post-images {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .image-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #6c757d, #adb5bd);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .tag.photo {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .tag.recipe {
+            background: #28a745;
+            color: white;
+        }
+
+        .tag.review {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .tag.story {
+            background: #6f42c1;
+            color: white;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .write-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #6c757d;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(108,117,125,0.3);
+            transition: all 0.3s;
+        }
+
+        .write-button:hover {
+            background: #5a6268;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .community-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .post-categories {
+                justify-content: flex-start;
+            }
+
+            .write-button {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="insikwemain.html" class="logo">쩝쩝 박사</a>
+                <nav>
+                    <ul>
+                        <li><a href="insikwemain.html">메인</a></li>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="mypage.html">마이페이지</a></li>
+                        <li><a href="category.html">카테고리</a></li>
+                        <li><a href="kfood.html">레시피</a></li>
+                        <li><a href="master.html">커뮤니티</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>자유 게시판</h2>
+                <p>요리에 관한 모든 이야기를 자유롭게 나누어요</p>
+            </div>
+
+            <div class="community-nav">
+                <a href="master.html">고수의 팁</a>
+                <a href="question.html">요린이의 질문</a>
+                <a href="free.html" class="active">자유 게시판</a>
+            </div>
+
+            <div class="post-categories">
+                <a href="#" class="category-tab active">전체</a>
+                <a href="#" class="category-tab">요리 자랑</a>
+                <a href="#" class="category-tab">맛집 추천</a>
+                <a href="#" class="category-tab">요리 후기</a>
+                <a href="#" class="category-tab">일상 이야기</a>
+                <a href="#" class="category-tab">재료 나눔</a>
+            </div>
+
+            <div class="post-list">
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">오늘 처음 만든 김치볶음밥 자랑해요!</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">김</div>
+                                    <span>김치볶음밥러버</span>
+                                </div>
+                                <span>2024.06.26</span>
+                                <span>조회 234</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        드디어 김치볶음밥에 성공했어요! 🎉 
+                        김치는 잘 익은 걸로 하고 밥은 차가운 밥으로 했더니 정말 맛있게 나왔네요. 
+                        계란후라이까지 올려서 완벽한 한 끼가 되었습니다. 다음엔 스팸도 넣어볼 예정이에요!
+                    </div>
+                    <div class="post-images">
+                        <div class="image-placeholder">🍚</div>
+                        <div class="image-placeholder">🥚</div>
+                        <div class="image-placeholder">📸</div>
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag photo">사진</span>
+                        <span class="tag recipe">레시피</span>
+                        <span class="tag">김치볶음밥</span>
+                        <span class="tag">성공</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 67</div>
+                        <div class="stat-item">💬 12</div>
+                        <div class="stat-item">🔖 23</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">홍대 맛집 발견! 파스타 맛집 추천</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">맛</div>
+                                    <span>맛집헌터</span>
+                                </div>
+                                <span>2024.06.26</span>
+                                <span>조회 189</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        홍대에서 정말 맛있는 파스타집을 찾았어요! 
+                        까르보나라가 정말 진짜 이탈리아 맛이 나더라고요. 크림 안 넣고 만든 정통 방식이라고 하네요. 
+                        가격도 합리적이고 분위기도 좋아서 데이트하기에도 좋을 것 같아요. 
+                        주소와 메뉴 정보 댓글로 공유할게요!
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">맛집</span>
+                        <span class="tag">홍대</span>
+                        <span class="tag">파스타</span>
+                        <span class="tag">추천</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 89</div>
+                        <div class="stat-item">💬 34</div>
+                        <div class="stat-item">🔖 56</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">처음으로 빵 만들어봤는데 대박!</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">빵</div>
+                                    <span>빵린이</span>
+                                </div>
+                                <span>2024.06.25</span>
+                                <span>조회 345</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        코로나 때부터 빵 만들기에 관심이 있었는데 드디어 도전해봤어요! 
+                        간단한 식빵부터 시작했는데 생각보다 너무 잘 나왔어요 ㅠㅠ 
+                        집 안에 빵 냄새가 퍼지니까 진짜 행복하더라고요. 
+                        다음엔 크로와상에 도전해볼 예정입니다!
+                    </div>
+                    <div class="post-images">
+                        <div class="image-placeholder">🍞</div>
+                        <div class="image-placeholder">✨</div>
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag photo">사진</span>
+                        <span class="tag">베이킹</span>
+                        <span class="tag">식빵</span>
+                        <span class="tag">성공</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 124</div>
+                        <div class="stat-item">💬 28</div>
+                        <div class="stat-item">🔖 67</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">마라탕 만들어 먹는 사람 있나요?</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">마</div>
+                                    <span>마라마니아</span>
+                                </div>
+                                <span>2024.06.25</span>
+                                <span>조회 156</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        요즘 마라탕 자주 시켜먹는데 배달비가 아까워서 집에서 만들어보려고 해요. 
+                        마라탕 베이스 어디서 사야 하는지, 어떤 재료들 넣으면 맛있는지 궁금해요. 
+                        혹시 집에서 마라탕 만들어 드시는 분들 계시면 팁 좀 알려주세요!
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">마라탕</span>
+                        <span class="tag">중식</span>
+                        <span class="tag">홈쿠킹</span>
+                        <span class="tag">질문</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 43</div>
+                        <div class="stat-item">💬 18</div>
+                        <div class="stat-item">🔖 29</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">다이어트 요리 레시피 공유해요</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">다</div>
+                                    <span>다이어터</span>
+                                </div>
+                                <span>2024.06.24</span>
+                                <span>조회 267</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        다이어트 중인데 너무 맛없는 것만 먹다가 스트레스 받아서 맛있는 다이어트 요리들 찾아봤어요! 
+                        두부스테이크, 닭가슴살 샐러드, 곤약볶음 등등 칼로리는 낮으면서도 맛있는 요리들이 많더라고요. 
+                        레시피 몇 개 정리해서 올릴게요. 같이 다이어트하시는 분들께 도움이 되었으면 좋겠어요 💪
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag recipe">레시피</span>
+                        <span class="tag">다이어트</span>
+                        <span class="tag">건강식</span>
+                        <span class="tag">저칼로리</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 156</div>
+                        <div class="stat-item">💬 45</div>
+                        <div class="stat-item">🔖 89</div>
+                    </div>
+                </div>
+
+                <div class="post-item">
+                    <div class="post-header">
+                        <div>
+                            <div class="post-title">혼자 사는 1인분 요리 고민이에요</div>
+                            <div class="post-meta">
+                                <div class="author-info">
+                                    <div class="author-avatar">혼</div>
+                                    <span>혼밥러버</span>
+                                </div>
+                                <span>2024.06.24</span>
+                                <span>조회 198</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        혼자 살다 보니까 요리해도 양이 너무 많아서 고민이에요. 
+                        1인분 요리하기도 애매하고 재료 사도 다 못 먹고 버리게 되고... 
+                        혼자 사시는 분들은 요리를 어떻게 하시나요? 
+                        1인분 요리 꿀팁이나 보관법 있으면 공유해주세요!
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag story">일상</span>
+                        <span class="tag">1인분</span>
+                        <span class="tag">혼밥</span>
+                        <span class="tag">고민</span>
+                    </div>
+                    <div class="post-stats">
+                        <div class="stat-item">👍 78</div>
+                        <div class="stat-item">💬 32</div>
+                        <div class="stat-item">🔖 41</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" class="write-button">✍️</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 정인식</p>
+        </div>
+    </footer>
+</body>
+</html>

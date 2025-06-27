@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쩝쩝 박사 - ㄷ으로 시작하는 레시피</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        /* Main Content */
+        main {
+            min-height: calc(100vh - 200px);
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .keyword-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .keyword-nav a {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            color: #ff6b6b;
+            text-decoration: none;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .keyword-nav a.active {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .recipe-list {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .recipe-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .recipe-item:last-child {
+            border-bottom: none;
+        }
+
+        .recipe-icon {
+            font-size: 2.5rem;
+            margin-right: 1.5rem;
+            width: 60px;
+            text-align: center;
+        }
+
+        .recipe-info {
+            flex: 1;
+        }
+
+        .recipe-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .recipe-description {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .recipe-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .recipe-tag {
+            background: #f8f9fa;
+            color: #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .recipe-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 100px;
+        }
+
+        .recipe-difficulty {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .recipe-time {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .keyword-nav {
+                justify-content: center;
+            }
+
+            .recipe-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .recipe-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .recipe-meta {
+                flex-direction: row;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="insikwemain.html" class="logo">쩝쩝 박사</a>
+                <nav>
+                    <ul>
+                        <li><a href="insikwemain.html">메인</a></li>
+                        <li><a href="login.html">로그인</a></li>
+                        <li><a href="mypage.html">마이페이지</a></li>
+                        <li><a href="category.html">카테고리</a></li>
+                        <li><a href="kfood.html">레시피</a></li>
+                        <li><a href="master.html">커뮤니티</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h2>ㄷ으로 시작하는 레시피</h2>
+                <p>ㄷ으로 시작하는 맛있는 요리들을 모아봤어요</p>
+            </div>
+
+            <div class="keyword-nav">
+                <a href="search.html">검색</a>
+                <a href="giuck.html">ㄱ</a>
+                <a href="nieun.html">ㄴ</a>
+                <a href="digeck.html" class="active">ㄷ</a>
+                <a href="rieul.html">ㄹ</a>
+                <a href="a.html">A</a>
+                <a href="b.html">B</a>
+                <a href="c.html">C</a>
+            </div>
+
+            <div class="recipe-list">
+                <div class="recipe-item">
+                    <div class="recipe-icon">🍗</div>
+                    <div class="recipe-info">
+                        <div class="recipe-name">닭갈비</div>
+                        <div class="recipe-description">미리 양념과 함께 재워둔 닭을 한 솥에 야채와 함께 볶아낸 요리</div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">한식</span>
+                            <span class="recipe-tag">볶음요리</span>
+                            <span class="recipe-tag">매운맛</span>
+                        </div>
+                    </div>
+                    <div class="recipe-meta">
+                        <span class="recipe-difficulty">보통</span>
+                        <span class="recipe-time">30분</span>
+                    </div>
+                </div>
+
+                <div class="recipe-item">
+                    <div class="recipe-icon">🍲</div>
+                    <div class="recipe-info">
+                        <div class="recipe-name">된장찌개</div>
+                        <div class="recipe-description">냄비에 물을 넣고 본인 간에 맞게 된장을 풀고 참치액을 넣고 야채와 두부를 넣는 요리</div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">한식</span>
+                            <span class="recipe-tag">찌개</span>
+                            <span class="recipe-tag">국물요리</span>
+                        </div>
+                    </div>
+                    <div class="recipe-meta">
+                        <span class="recipe-difficulty">쉬움</span>
+                        <span class="recipe-time">25분</span>
+                    </div>
+                </div>
+
+                <div class="recipe-item">
+                    <div class="recipe-icon">🍖</div>
+                    <div class="recipe-info">
+                        <div class="recipe-name">돼지고기 김치찜</div>
+                        <div class="recipe-description">돼지고기와 김치를 함께 약불에 익히는 요리</div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">한식</span>
+                            <span class="recipe-tag">찜요리</span>
+                            <span class="recipe-tag">김치요리</span>
+                        </div>
+                    </div>
+                    <div class="recipe-meta">
+                        <span class="recipe-difficulty">보통</span>
+                        <span class="recipe-time">45분</span>
+                    </div>
+                </div>
+
+                <div class="recipe-item">
+                    <div class="recipe-icon">🍜</div>
+                    <div class="recipe-info">
+                        <div class="recipe-name">동태찌개</div>
+                        <div class="recipe-description">동태를 먼저 익히고 어느 정도 동태의 육수가 나오면 양념장과 야채를 넣는 요리</div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">한식</span>
+                            <span class="recipe-tag">찌개</span>
+                            <span class="recipe-tag">생선요리</span>
+                        </div>
+                    </div>
+                    <div class="recipe-meta">
+                        <span class="recipe-difficulty">보통</span>
+                        <span class="recipe-time">35분</span>
+                    </div>
+                </div>
+
+                <div class="recipe-item">
+                    <div class="recipe-icon">🥩</div>
+                    <div class="recipe-info">
+                        <div class="recipe-name">등심구이</div>
+                        <div class="recipe-description">앞뒤로 분 옆은 30초 강불에 구워내는 요리</div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">한식</span>
+                            <span class="recipe-tag">구이</span>
+                            <span class="recipe-tag">고기요리</span>
+                        </div>
+                    </div>
+                    <div class="recipe-meta">
+                        <span class="recipe-difficulty">보통</span>
+                        <span class="recipe-time">20분</span>
+                    </div>
+                </div>
+
+                <div class="recipe-item">
+                    <div class="recipe-icon">🥟</div>
+                    <div class="recipe-info">
+                        <div class="recipe-name">두부전</div>
+                        <div class="recipe-description">두부를 알맞은 크기로 자른 후 중불에 노릇하게 구워내는 요리</div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tag">한식</span>
+                            <span class="recipe-tag">전</span>
+                            <span class="recipe-tag">두부요리</span>
+                        </div>
+                    </div>
+                    <div class="recipe-meta">
+                        <span class="recipe-difficulty">쉬움</span>
+                        <span class="recipe-time">15분</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 정인식</p>
+        </div>
+    </footer>
+</body>
+</html>
