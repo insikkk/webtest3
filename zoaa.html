@@ -3,79 +3,94 @@
 <head>
 <meta charset="utf-8">
 <style>
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: '맑은 고딕';
-  position: relative;
-}
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: '맑은 고딕', sans-serif;
+  }
 
-H2 {
-  color: black;
-  text-shadow: 3px 3px 10px gray;
-  font-size: 25px;
-}
+  h2 {
+    color: black;
+    text-shadow: 3px 3px 10px gray;
+    font-size: 25px;
+  }
 
-p {
-  color: #0000FF;
-  text-decoration: underline;
-  font-weight: bold;
-}
+  p {
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+  }
 
-ul {
-  color: black;
-  text-decoration: none;
-  font-weight: normal;
-}
+  ul {
+    color: black;
+    list-style-type: disc;
+    padding-left: 20px;
+  }
 
-.photo {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 100px;
-  height: 130px;
-}
+  .section {
+    border: 1px solid #ccc; /* 칸 테두리 */
+    padding: 15px;           /* 안쪽 여백 */
+    margin-bottom: 15px;     /* 아래 여백 */
+    border-radius: 5px;      /* 모서리 둥글게 (선택사항) */
+  }
+
+  .photo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 100px;
+    height: 130px;
+  }
 </style>
 </head>
 <body>
 
-<!-- 증명사진 -->
 <img src="me.png" alt="증명사진" class="photo">
 
-<H2>이력서</H2>
+<h2>이력서</h2>
 
-<p>개인 정보</p>
-<ul>
-  <li>이름: 정인식</li>
-  <li>연락처: 010-9711-3520</li>
-  <li>이메일: cazan1244@gmail.com</li>
-  <li>주소: 경기도 안산시 단원구 신각길 44, 203동 1101호</li>
-</ul>
+<div class="section">
+  <p>개인 정보</p>
+  <ul>
+    <li>이름: 정인식</li>
+    <li>연락처: 010-9711-3520</li>
+    <li>이메일: cazan1244@gmail.com</li>
+    <li>주소: 경기도 안산시 단원구 신각길 44, 203동 1101호</li>
+  </ul>
+</div>
 
-<p>학력</p>
-<ul>
-  <li>한국폴리텍 대학교 인천캠퍼스 (2025 ~ 2027.02)</li>
-</ul>
+<div class="section">
+  <p>학력</p>
+  <ul>
+    <li>한국폴리텍 대학교 인천캠퍼스 (2025 ~ 2027.02)</li>
+  </ul>
+</div>
 
-<p>경력</p>
-<ul>
-  <li>영흥 발전소 4개월 근무</li>
-</ul>
+<div class="section">
+  <p>경력</p>
+  <ul>
+    <li>영흥 발전소 4개월 근무</li>
+  </ul>
+</div>
 
-<p>자격증</p>
-<ul>
-  <li>정보처리기사</li>
-  <li>SQLD</li>
-  <li>컴퓨터 활용능력 1급</li>
-  <li>한국사 1급</li>
-  <li>운전 면허 2종 보통</li>
-  <li>TOEIC 880점</li>
-</ul>
+<div class="section">
+  <p>자격증</p>
+  <ul>
+    <li>정보처리기사</li>
+    <li>SQLD</li>
+    <li>컴퓨터 활용능력 1급</li>
+    <li>한국사 1급</li>
+    <li>운전 면허 2종 보통</li>
+    <li>TOEIC 880점</li>
+  </ul>
+</div>
 
-<p>자기소개</p>
-<ul>
-  <li>IT 수업을 들으며 개발자의 꿈을 키운 정인식입니다. 원래 무언가를 창조하는 것에 관심이 있었고 수업 내용을 바탕으로 홈페이지 관련 프로그래밍을 만들어내고 싶어 하였습니다. 제가 배웠던 여러가지 프로그래밍을 바탕으로 회사 업무에 기여하고 싶습니다.</li>
-</ul>
+<div class="section">
+  <p>자기소개</p>
+  <ul>
+    <li>IT 수업을 들으며 개발자의 꿈을 키운 정인식입니다. 원래 무언가를 창조하는 것에 관심이 있었고 수업 내용을 바탕으로 홈페이지 관련 프로그래밍을 만들어내고 싶어 하였습니다. 제가 배웠던 여러가지 프로그래밍을 바탕으로 회사 업무에 기여하고 싶습니다.</li>
+  </ul>
+</div>
 
 </body>
 </html>
