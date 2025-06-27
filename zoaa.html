@@ -31,26 +31,27 @@
     border: 1px solid #ccc; /* 칸 테두리 */
     padding: 15px;           /* 안쪽 여백 */
     margin-bottom: 15px;     /* 아래 여백 */
-    border-radius: 5px;      /* 모서리 둥글게 (선택사항) */
+    border-radius: 5px;      /* 모서리 둥글게 */
+    position: relative;      /* 사진 위치 기준 */
   }
 
   .photo {
-    position: absolute;
-    top: 30px;
-    right: 10px;
-    width: 110px;
-    height: 140px;
+    width: 100px;
+    height: 130px;
+    float: right;       /* 오른쪽에 띄우기 */
+    margin-left: 15px;  /* 사진 왼쪽 공간 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
 </style>
 </head>
 <body>
 
-<img src="me.png" alt="증명사진" class="photo">
-
 <h2>이력서</h2>
 
 <div class="section">
   <p>개인 정보</p>
+  <img src="me.png" alt="증명사진" class="photo">
   <ul>
     <li>이름: 정인식</li>
     <li>연락처: 010-9711-3520</li>
